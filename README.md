@@ -1,18 +1,18 @@
-# PureEditor Python Runtime Plugin 🐍
+# PureEditor Runtime Plugins 🧩
 
 [中文](README_CN.md) | [English]
 
-**Offline Python Runtime Plugin Package for PureEditor (HarmonyOS).**
+**Offline Runtime Plugin Packages for PureEditor (HarmonyOS).**
 
-This repository hosts the core runtime files required for PureEditor. By installing this plugin, you can enable local, offline, and secure Python code writing and execution capabilities within PureEditor.
+This repository hosts the core runtime files required for PureEditor. By installing these plugins, you can enable local, offline, and secure code writing and execution capabilities (Python & C/C++) within PureEditor.
 
 > **Core Version Information**:
 >
-> - **Python**: 3.13.0
-> - **Pyodide**: 0.29.0 (Based on WebAssembly)
+> - **Python**: 3.13.0 (Pyodide 0.29.0)
+> - **C/C++**: Clang 8.0.1 (Based on WASI SDK)
 > - **Architecture**: Wasm (Cross-platform, local sandbox execution)
 
-PureEditor supports Wasm plugin functionality starting from version v0.6.20, currently supporting Python only. Future versions plan to provide compilation and running support for C, C++, and Rust.
+PureEditor supports Wasm plugin functionality starting from version v0.6.20. Currently supports Python and C/C++.
 
 ------
 
@@ -31,7 +31,8 @@ PureEditor supports Wasm plugin functionality starting from version v0.6.20, cur
 
 Please download the latest plugin package from the [Releases] page on the right:
 
-- Filename: `plugin_pyodide_3.13.zip`
+- **Python Runtime**: `plugin_pyodide_3.13.zip`
+- **C/C++ Runtime**: `plugin_clang_8.0.1.zip`
 
 ### Step 2: Unlock Features 🥚
 
@@ -46,19 +47,19 @@ Since this is an experimental feature, it is hidden by default. Please follow th
 ### Step 3: Import and Install
 
 1. Return to the **Settings** page. You will now see the **Show Hidden Folders** and **Plugin Management** group.
-2. Tap **Plugin Management**.
-3. Tap **Import Environment Package** and select the `plugin_pyodide_3.13.zip` you just downloaded in the file picker.
+2. Tap **Plugin Management**..zip` package you just downloaded (supports batch import).
 4. Wait for the verification and decompression to complete (this may take a few seconds).
 
 ------
 
 ## 🚀 How to Use
 
-1. **New/Open File**: Ensure the file has a `.py` suffix (e.g., `test.py`).
+1. **New/Open File**: Ensure the file has a supported suffix (e.g., `.py` for Python, `.c`/`.cpp` for C/C++).
 2. **Open Menu**: Open the sidebar (tap the top-left icon or swipe right from the left edge).
 3. **Run**: Click the **"Compile & Run"** button in the sidebar.
-4. **Interact**: The program will start, and results will be output to the console. If the code contains `input()`, an input box will automatically pop up at the bottom waiting for input.
+4. **Interact**: The program will start, and results will be output to the console. If the code contains `input()` or `cin`, an input box will automatically pop up at the bottom waiting for input.
 
+> **Tip**: After the first installation, a demo file (e.g., `Hello_PureEditor_demo.py` or `Hello_PureEditor_demo.cpp`)
 > **Tip**: After the first installation, a `Hello_PureEditor_demo.py` will be automatically generated in the root directory of "My Files". You can run it directly to test the environment.
 
 ------
@@ -69,12 +70,18 @@ To ensure security, PureEditor performs **SHA-256** fingerprint verification on 
 
 ### File Structure
 
-The `plugin_pyodide_3.13.zip` contains the following core files after decompression:
-
+**Python Plugin (`plugin_pyodide_3.13.zip`)**:
 - `pyodide.js`: Bootloader
-- `pyodide.asm.wasm`: Binary file of the compiled Python interpreter
-- `python_stdlib.zip`: Python standard library archive
-- `Hello_PureEditor_demo.py`: Demo script
+- `pyodide.asm.wasm`: Python Interpreter
+- `python_stdlib.zip`: Standard Library
+- `Hello_PureEditor_demo.py`: Demo Script
+
+**C/C++ Plugin (`plugin_clang_8.0.1.zip`)**:
+- `clang.js`: Compiler Bootloader
+- `clang.wasm`: Clang Compiler Core
+- `lld.wasm`: LLD Linker
+- `sysroot.tar`: Standard Headers & Libs (Libc/Libc++)
+- `Hello_PureEditor_demo.cpp`: Demo Script
 
 ### FAQ
 
@@ -93,11 +100,12 @@ A: We utilize `SharedArrayBuffer` and `Atomics.wait` technology to run Python in
 **Q: Why is the runtime provided as a plugin instead of being built-in?**
 
 A: To keep the main PureEditor app **lightweight and pure**.
-The complete Python runtime (including the Wasm interpreter and standard library) is relatively large (30MB+ when unzipped). Bundling it directly would significantly increase the app size and affect startup speed. By using a plugin system, we give the choice to the user—casual users enjoy a lightning-fast text editor, while developers can extend powerful code execution capabilities on demand.
+The complete Python runtime (s are built based on **Pyodide** and **LLVM/Clang**.
 
-------
-
-## ⚖️ License
+- **PureEditor Plugin**: MIT License
+- **Python**: PSF License
+- **Pyodide**: Mozilla Public License 2.0
+- **LLVM/Clang**: Apache License 2.0 with LLVM Exceptions
 
 This project's plugin package is built based on **Pyodide**.
 
