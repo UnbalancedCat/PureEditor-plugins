@@ -29,7 +29,7 @@ PureEditor 在 v0.6.20 版本开始支持 Wasm 插件功能。目前支持 Pytho
 
 ### 第一步：下载插件包
 
-请在右侧 [release] 页面下载最新的插件包：
+请在右侧 [release](https://gitee.com/UnbalancedCat/PureEditor-plugins/releases/) 页面下载最新的插件包：
 
 - **Python 环境**: `plugin_pyodide_3.13.zip`
 - **C/C++ 环境**: `plugin_clang_8.0.1.zip`

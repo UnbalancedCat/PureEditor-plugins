@@ -29,7 +29,7 @@ PureEditor supports Wasm plugin functionality starting from version v0.6.20. Cur
 
 ### Step 1: Download the Plugin Package
 
-Please download the latest plugin package from the [Releases] page on the right:
+Please download the latest plugin package from the [Releases](https://github.com/UnbalancedCat/PureEditor-plugins/releases/) page on the right:
 
 - **Python Runtime**: `plugin_pyodide_3.13.zip`
 - **C/C++ Runtime**: `plugin_clang_8.0.1.zip`
