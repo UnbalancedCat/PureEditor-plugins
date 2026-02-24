@@ -1,0 +1,8 @@
+{
+  "name": "Clang C/C++ Environment",
+  "version": "8.0.1",
+  "type": "cpp",
+  "minAppVersion": 6025,
+  "description": "Portable Clang compiler and LLD linker with Wasm Sysroot.",
+  "entry": "worker_bootstrap.js"
+}
